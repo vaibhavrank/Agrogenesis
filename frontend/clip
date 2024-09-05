@@ -1,0 +1,18 @@
+// client/src/App.js
+
+
+// client/src/context/AuthContext.js
+
+// client/src/components/Navbar.js
+
+// client/src/components/ProtectedRoute.js
+// client/src/pages/Login.js
+
+// client/src/pages/Register.js
+// client/src/pages/Dashboard.js
+// client/src/pages/FertilizerRecommendation.js
+
+// client/src/pages/Consultation.js
+// client/src/pages/Content.js
+// client/src/services/api.js
+// client/src/services/auth.js
