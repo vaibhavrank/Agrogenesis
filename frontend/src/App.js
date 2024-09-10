@@ -1,72 +1,40 @@
-import React from 'react';
-import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import MainHeader from './components/MainHeader';
-import SoilDataForm from './components/solidDataForm';
-import { AuthProvider } from './contexts/AuthContext';
-import Dashboard from './pages/Dshboard';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
-import SoilAnalysis from './pages/SoilAnalysis';
-import Home from './pages/Home';
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
-};
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Home from "./Pages/Home";
+import Legal from "./Pages/Legal";
+import NotFound from "./Pages/NotFound";
+import Appointment from "./Pages/Appointment";
+import  Login  from "./Pages/Login";
+import Register from "./Pages/Register";
+import BookAppointment from "./Components/BookAppointment";
+import Service from "./Pages/Service";
+import SoilDataForm from "./Components/SoilFrom";
+import Reviews from "./Components/Reviews";
+import Navbar from "./Components/Navbar";
 function App() {
   return (
-        <div className="flex flex-col min-h-screen"> 
-    <AuthProvider>
-    <Router>
-          <Header />
-          <main className="flex-grow">
-            <Routes>
-              <Route path='/' element={<MainHeader />}/>
-              <Route index  element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <>
-                    <Dashboard />
-                  </>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <>
-                    <Profile />
-                  </>
-                }
-              />
-              <Route
-                path="/soil-data"
-                element={
-                  <>
-                    <SoilDataForm />
-                  </>
-                }
-              />
-              <Route
-                path="/analyze/:id"
-                element={
-                  <>
-                    <SoilAnalysis />
-                  </>
-                }
-              />
-              <Route path="/" element={<Navigate to="/dashboard" />} />
-            </Routes>
-          </main>
-          <Footer />
+    <div className="App">
+      {/* <Navbar /> */}
+      <Router basename="/">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path = "AgriGenesis" element={<Home/>} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/login" element={<Login /> } />
+          <Route path="*" element={<NotFound />} />
+          <Route path='/register' element={<Register/>} />
+          <Route path="/review" element={<Reviews/>} />
+          {/* <Route path="/expert" element={<Farm/>} /> */}
+          <Route path="/appointment" element={<Appointment/>} />
+
+          <Route path="/bookappointment" element={<BookAppointment/>} /> 
+          <Route path="/soilform" element={<SoilDataForm/>} />  
+          <Route path="/service" element={<Service/>} /> 
+        </Routes>
       </Router>
-      </AuthProvider>
-     </div> 
+    </div>
   );
 }
 

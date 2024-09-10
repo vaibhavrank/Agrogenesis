@@ -1,44 +1,28 @@
-// Store user data in local storage
-export const setStoredUser = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-  };
-  
-  // Retrieve user data from local storage
-  export const getStoredUser = () => {
-    const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
-  };
-  
-  // Remove user data from local storage
-  export const removeStoredUser = () => {
-    localStorage.removeItem('user');
-  };
-  
-  // Check if the user is authenticated
-  export const isAuthenticated = () => {
-    const user = getStoredUser();
-    return !!user && !!user.token;
-  };
-  
-  // Get the authentication token
-  export const getToken = () => {
-    const user = getStoredUser();
-    return user ? user.token : null;
-  };
-  
-  // Set the authentication token
-  export const setToken = (token) => {
-    const user = getStoredUser();
-    if (user) {
-      user.token = token;
-      setStoredUser(user);
+const API_URL = 'http://localhost:5000'
+ const login = async (email,password)=>{
+    try{
+        console.log("Login called ",email,password);
+        const response = await fetch(`${API_URL}/auth/login`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body : JSON.stringify({
+                email,password
+            }), 
+        });
+        const data = await response.json();
+        console.log("DATA",data);
+        if (!data.ok) {
+            throw new Error('Login failed');
+        }
+        console.log(data.token);
+        alert("Logged in successfully");
+        return await data;
+    }catch(error){
+        alert(error.message);
+        throw new Error(error.message);
     }
-  };
+};
 
-  // Logout 
-  export const logout = ()=>{
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    window.location.reload();
-
-  }
+export default login;   

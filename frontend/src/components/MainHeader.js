@@ -3,7 +3,11 @@ import { Outlet } from "react-router-dom";
 
 const MainHeader = ()=>{
     return(
-        <Outlet></Outlet>
+        <div>
+            <Outlet></Outlet>
+            <p></p>
+        </div>
+        
     )
 }
 export default MainHeader;
